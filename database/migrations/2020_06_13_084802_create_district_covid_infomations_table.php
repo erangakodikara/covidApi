@@ -24,7 +24,7 @@ class CreateDistrictCovidInfomationsTable extends Migration
             $table->integer('oberve')->default(0);
             $table->timestamps();
             
-            //$table->foreign('district_id')->references('id')->on('districts');
+            $table->foreign('district_id')->references('id')->on('districts');
         });
     }
 

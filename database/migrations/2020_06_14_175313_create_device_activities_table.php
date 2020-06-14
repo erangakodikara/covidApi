@@ -15,7 +15,7 @@ class CreateDeviceActivitiesTable extends Migration
     {
         Schema::create('device_activities', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
             $table->string('device_token');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
