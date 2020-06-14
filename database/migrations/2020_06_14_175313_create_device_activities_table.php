@@ -18,7 +18,7 @@ class CreateDeviceActivitiesTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->string('device_token');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+           //$table->foreign('user_id')->references('id')->on('users');
         });
     }
 
