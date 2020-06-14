@@ -16,12 +16,12 @@ class CreateDistrictCovidInfomationsTable extends Migration
         Schema::create('district_covid_infomations', function (Blueprint $table) {
             $table->id();
             $table->integer('district_id')->unsigned();
-            $table->integer('new_cases');
-            $table->integer('total_cases');
-            $table->integer('deaths');
-            $table->integer('recovered');
-            $table->integer('pcr');
-            $table->integer('oberve');
+            $table->integer('new_cases')->default(0);
+            $table->integer('total_cases')->default(0);
+            $table->integer('deaths')->default(0);
+            $table->integer('recovered')->default(0);
+            $table->integer('pcr')->default(0);
+            $table->integer('oberve')->default(0);
             $table->timestamps();
             
             $table->foreign('district_id')->references('id')->on('districts');

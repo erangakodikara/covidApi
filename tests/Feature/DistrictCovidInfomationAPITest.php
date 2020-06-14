@@ -8,22 +8,32 @@ use Tests\TestCase;
 
 class DistrictCovidInfomationAPITest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function testGetAllDistrictCovidInfomation()
+
+    // public function testGetAllDistrictCovidInfomation()
+    // {
+    //     // $response = $this->get('/api/district');
+    //     // var_dump($response);
+    //     // die;
+    //     // $district = factory(\App\District::class, 'districtA')->create(['districtname'=>'Colombo']);
+    //     // $districtCovidInfomation= factory(\App\DistrictCovidInfomation::class, 'DistrictCovidInfomationA')->create(['district_id'=>$district->id]);
+    //     // // var_dump( $districtCovidInfomation);
+    //     // // die;
+    //     // $this->json('GET', static::API_PATH.'/district')
+    //     // ->assertJson($this->buildResponsePayload([
+    //     //     'error' => true,
+    //     //     'id'     => 7
+    //     // ],['created_at']))
+    //     // ->assertStatus(200);
+    //     //$response->assertStatus(200);
+    // }
+    public function testGetAllDistrict()
     {
-        // $response = $this->get('/api/district');
-        // var_dump($response);
-        // die;
+
+        $district = factory(\App\District::class, 'districtA')->create(['districtname'=>'Colombo']);
+
         $this->json('GET', static::API_PATH.'/district')
-        ->assertJson($this->buildResponsePayload([
-            'error' => true,
-            'id'     => 7
-        ],['created_at']))
-        ->assertStatus(200);
-        //$response->assertStatus(200);
+        ->assertStatus(200)
+        ->assertArraySubset(['count'=>6]);
+
     }
 }

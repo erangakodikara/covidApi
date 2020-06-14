@@ -19,5 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //Route::resource('district', 'DistrictCovidInfomationController');
-Route::get('district', 'DistrictCovidInfomationController@index');
-Route::get('district/{district}', 'DistrictCovidInfomationController@getDistrictData');
+Route::get('district', 'DistrictController@index');
+Route::get('district/{id}', 'DistrictController@getDistrict');
+Route::get('local-all-infomation', 'DistrictCovidInfomationController@index');
+Route::get('local-all-infomation/{district}', 'DistrictCovidInfomationController@getDistrictData');

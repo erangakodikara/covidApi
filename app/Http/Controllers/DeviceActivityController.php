@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\District;
+use App\DeviceActivity;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
-class DistrictController extends Controller
+class DeviceActivityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,22 +14,7 @@ class DistrictController extends Controller
      */
     public function index()
     {
-        $data = District::all();
-        if($data) {
-            return $this->api->sendResponse( $data);
-        }
-        return $this->api->sendResponse(['error' => ['Record not found']], Response::HTTP_NOT_FOUND);
-    }
-
-    public function getDistrict($id)
-    {
-        $district = District::where('id', '=', $id)->get();
-        if($district){
-            return $this->api->sendResponse($district);
-        } 
-
-        
-        return $this->api->sendResponse(['District name not found'],404);
+        //
     }
 
     /**
@@ -57,10 +41,10 @@ class DistrictController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\District  $district
+     * @param  \App\DeviceActivity  $deviceActivity
      * @return \Illuminate\Http\Response
      */
-    public function show(District $district)
+    public function show(DeviceActivity $deviceActivity)
     {
         //
     }
@@ -68,10 +52,10 @@ class DistrictController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\District  $district
+     * @param  \App\DeviceActivity  $deviceActivity
      * @return \Illuminate\Http\Response
      */
-    public function edit(District $district)
+    public function edit(DeviceActivity $deviceActivity)
     {
         //
     }
@@ -80,10 +64,10 @@ class DistrictController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\District  $district
+     * @param  \App\DeviceActivity  $deviceActivity
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, District $district)
+    public function update(Request $request, DeviceActivity $deviceActivity)
     {
         //
     }
@@ -91,10 +75,10 @@ class DistrictController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\District  $district
+     * @param  \App\DeviceActivity  $deviceActivity
      * @return \Illuminate\Http\Response
      */
-    public function destroy(District $district)
+    public function destroy(DeviceActivity $deviceActivity)
     {
         //
     }

@@ -16,28 +16,28 @@ class DistrictCovidInfomationController extends Controller
      */
     public function index()
     {
-        //return [ 'message' => 'Success','status'=>200, 'data' => DistrictCovidInfomation::all()];
+        
         $data = DistrictCovidInfomation::all(); 
         if($data) {
-            return $this->api->sendResponse( DistrictCovidInfomation::all());
+            return $this->api->sendResponse( $data);
         }
         return $this->api->sendResponse(['error' => ['Record not found']], Response::HTTP_NOT_FOUND);
     }
 
 
-    public function getDistrictData($districtName)
+    public function getDistrictData($districtId)
     {
 
-        $district = District::where('districtname',$districtName)->first();
+        $district = District::where('id',$districtId)->first();
 
         if($district){
 
             $districtData = DistrictCovidInfomation::where('district_id', '=', $district->id)->get();
-            //eturn[ 'message' => 'Success','status'=>200, 'data' => $districtData];
+            
             return $this->api->sendResponse($districtData);
         } 
 
-        //return [ 'message' => 'District name not found','status'=>404, 'data' =>[]];
+        
         return $this->api->sendResponse(['District name not found'],404);
     }
 
