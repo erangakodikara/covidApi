@@ -1,0 +1,10 @@
+# Dockerfile
+FROM php:7.1-apache
+RUN apt-get update
+RUN apt-get install git -y
+RUN docker-php-ext-install pdo_mysql
+RUN a2enmod rewrite
+
+
+RUN cd /var/www && git clone https://github.com/erangakodikara/covidApi.git && cd covidApi && git checkout development
+
