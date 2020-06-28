@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\District;
+use App\Model\District;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Repositories\Interfaces\DistrictRepositoryInterface;
 
 class DistrictController extends Controller
 {
+
+    private $districtRepository;
+    public function __construct(DistrictRepositoryInterface $districtRepository) {
+        parent::__construct();
+        $this->districtRepository = $districtRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,7 @@ class DistrictController extends Controller
      */
     public function index()
     {
-        $data = District::all();
+        $data =  $this->districtRepository->all();
         if($data) {
             return $this->api->sendResponse( $data);
         }
@@ -24,12 +31,11 @@ class DistrictController extends Controller
 
     public function getDistrict($id)
     {
-        $district = District::where('id', '=', $id)->get();
-        if($district){
+        $district =  $this->districtRepository->getById($id);
+        if($district) {
             return $this->api->sendResponse($district);
         } 
 
-        
         return $this->api->sendResponse(['District name not found'],404);
     }
 
@@ -57,7 +63,7 @@ class DistrictController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\District  $district
+     * @param  \App\Model\District  $district
      * @return \Illuminate\Http\Response
      */
     public function show(District $district)
@@ -68,7 +74,7 @@ class DistrictController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\District  $district
+     * @param  \App\Model\District  $district
      * @return \Illuminate\Http\Response
      */
     public function edit(District $district)
@@ -80,7 +86,7 @@ class DistrictController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\District  $district
+     * @param  \App\Model\District  $district
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, District $district)
@@ -91,7 +97,7 @@ class DistrictController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\District  $district
+     * @param  \App\Model\District  $district
      * @return \Illuminate\Http\Response
      */
     public function destroy(District $district)

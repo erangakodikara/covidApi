@@ -22,4 +22,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('district', 'DistrictController@index');
 Route::get('district/{id}', 'DistrictController@getDistrict');
 Route::get('local-all-infomation', 'DistrictCovidInfomationController@index');
-Route::get('local-all-infomation/{district}', 'DistrictCovidInfomationController@getDistrictData');
+Route::get('local-all-infomation/{id}', 'DistrictCovidInfomationController@getDistrictInfomation');

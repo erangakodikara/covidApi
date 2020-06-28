@@ -12,5 +12,6 @@ class DistrictCovidInfomationSeeder extends Seeder
     public function run()
     {
         //
+        factory(App\Model\DistrictCovidInfomation::class,100)->create();
     }
 }

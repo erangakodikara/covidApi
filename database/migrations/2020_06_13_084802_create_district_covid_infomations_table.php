@@ -14,8 +14,8 @@ class CreateDistrictCovidInfomationsTable extends Migration
     public function up()
     {
         Schema::create('district_covid_infomations', function (Blueprint $table) {
-            $table->id();
-            $table->integer('district_id')->unsigned();
+            $table->bigincrements('id');
+            $table->unsignedBigInteger('district_id');
             $table->integer('new_cases')->default(0);
             $table->integer('total_cases')->default(0);
             $table->integer('deaths')->default(0);
@@ -24,7 +24,7 @@ class CreateDistrictCovidInfomationsTable extends Migration
             $table->integer('oberve')->default(0);
             $table->timestamps();
             
-           // $table->foreign('district_id')->references('id')->on('districts');
+           $table->foreign('district_id')->references('id')->on('districts');
         });
     }
 

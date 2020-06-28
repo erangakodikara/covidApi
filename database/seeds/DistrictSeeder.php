@@ -11,6 +11,6 @@ class DistrictSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Model\District::class,100)->create();
     }
 }

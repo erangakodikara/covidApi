@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class DeviceActivitySeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class DeviceActivitySeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Model\DeviceActivity::class,100)->create();
+        factory(App\User::class, 25)->create();
     }
 }

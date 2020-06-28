@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\DistrictCovidInfomation;
-use App\District;
+use App\Model\DistrictCovidInfomation;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use App\Repositories\Interfaces\DistrictCovidInfomationRepositoryInterface;
 
 class DistrictCovidInfomationController extends Controller
 {
+    private $districtInfoRepository;
+    public function __construct(DistrictCovidInfomationRepositoryInterface $districtInfoRepository) {
+        parent::__construct();
+        $this->districtInfoRepository = $districtInfoRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,31 +21,27 @@ class DistrictCovidInfomationController extends Controller
      */
     public function index()
     {
-        
-        $data = DistrictCovidInfomation::all(); 
-        if($data) {
-            return $this->api->sendResponse( $data);
+        //return $this->districtInfoRepository->all();  
+
+        $data = $this->districtInfoRepository->all();
+        if(!$data) {
+            return $this->api->sendResponse(['error' => ['Record not found']], Response::HTTP_NOT_FOUND);
+            
         }
-        return $this->api->sendResponse(['error' => ['Record not found']], Response::HTTP_NOT_FOUND);
+        return $this->api->sendResponse( $data);
+
     }
 
-
-    public function getDistrictData($districtId)
+    public function getDistrictInfomation($id)
     {
 
-        $district = District::where('id',$districtId)->first();
-
-        if($district){
-
-            $districtData = DistrictCovidInfomation::where('district_id', '=', $district->id)->get();
-            
-            return $this->api->sendResponse($districtData);
-        } 
-
+        $districtData =  $this->districtInfoRepository->getByDistrictId($id);
+        if(!$districtData) {
+            return $this->api->sendResponse(['District name not found'],404);
+        }
         
-        return $this->api->sendResponse(['District name not found'],404);
+        return $this->api->sendResponse($districtData);
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -66,7 +67,7 @@ class DistrictCovidInfomationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\DistrictCovidInfomation  $districtCovidInfomation
+     * @param  \App\Model\DistrictCovidInfomation  $districtCovidInfomation
      * @return \Illuminate\Http\Response
      */
     public function show(DistrictCovidInfomation $districtCovidInfomation)
@@ -77,7 +78,7 @@ class DistrictCovidInfomationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\DistrictCovidInfomation  $districtCovidInfomation
+     * @param  \App\Model\DistrictCovidInfomation  $districtCovidInfomation
      * @return \Illuminate\Http\Response
      */
     public function edit(DistrictCovidInfomation $districtCovidInfomation)
@@ -89,7 +90,7 @@ class DistrictCovidInfomationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\DistrictCovidInfomation  $districtCovidInfomation
+     * @param  \App\Model\DistrictCovidInfomation  $districtCovidInfomation
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, DistrictCovidInfomation $districtCovidInfomation)
@@ -100,7 +101,7 @@ class DistrictCovidInfomationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\DistrictCovidInfomation  $districtCovidInfomation
+     * @param  \App\Model\DistrictCovidInfomation  $districtCovidInfomation
      * @return \Illuminate\Http\Response
      */
     public function destroy(DistrictCovidInfomation $districtCovidInfomation)
