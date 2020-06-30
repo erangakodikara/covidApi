@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\DeviceActivity;
+use App\Model\DeviceActivity;
 use Illuminate\Http\Request;
 
 class DeviceActivityController extends Controller
