@@ -17,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//Route::resource('district', 'DistrictCovidInfomationController');
+Route::get('district', 'DistrictController@index');
+Route::get('district/{id}', 'DistrictController@getDistrict');
+Route::get('local-all-infomation', 'DistrictCovidInfomationController@index');
+Route::get('local-all-infomation/{id}', 'DistrictCovidInfomationController@getDistrictInfomation');

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Model\DeviceActivity;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','device_token',
     ];
 
     /**
@@ -36,4 +37,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function deviceActivity()
+    {
+        return $this->hasMany(DeviceActivity::class);
+    }
 }
